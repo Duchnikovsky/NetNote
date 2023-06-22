@@ -1,0 +1,120 @@
+.input {
+  width: 285px;
+  height: 45px;
+  margin-top: 40px;
+  outline: 0;
+  border: 0;
+  padding-left: 40px;
+  padding-right: 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  box-sizing: border-box;
+  background-color: #1e1d1d;
+  color: white;
+  border: 1px solid #fff5cc;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 17px;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.input:hover {
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 2px #fff5cc);
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.input:focus {
+  filter: drop-shadow(0 0 5px #ffcc00);
+  border-color: #ffdb4d;
+}
+
+.input[type='password'] {
+  width: 285px;
+  height: 45px;
+  margin-top: 40px;
+  outline: 0;
+  border: 0;
+  padding-left: 40px;
+  padding-right: 20px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #1e1d1d;
+  color: white;
+  border: 1px solid #fff5cc;
+  font-family: 'Courier New', Courier, monospace;
+  padding-top: 5px;
+  font-size: 25px;
+}
+
+.input[type='password']:hover {
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 2px #fff5cc);
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.input[type='password']:focus {
+  filter: drop-shadow(0 0 5px #ffcc00);
+  border-color: #ffdb4d;
+}
+
+
+.form {
+  position: relative;
+}
+
+.form i {
+  position: absolute;
+  top: 42px;
+  right: 355px;
+  padding: 10px 10px;
+  font-size: 16px;
+  color: #ffdb4d;
+}
+
+.error {
+  font-size: 13px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  margin: auto;
+  margin-top: 10px;
+  width: 260px;
+}
+
+.input:valid~div span {
+  color: gray;
+}
+
+.button {
+  margin-top: 40px;
+  font-family: 'Courier New';
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  color: #ffdb4d;
+  border: 1px solid #ffdb4d;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.button:disabled {
+  background-color: #2d2d2d;
+  color: gray;
+  border: 1px solid gray;
+}
+
+.button:not(:disabled):hover {
+  cursor: pointer;
+  background-color: #2d2d2d;
+  color: white;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
