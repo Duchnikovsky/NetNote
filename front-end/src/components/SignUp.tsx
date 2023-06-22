@@ -1,9 +1,11 @@
 import CSS from '../styles/auth.module.css'
 import FormCSS from '../styles/form.module.css'
-import { faKey, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faKey, faRotate, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { IconProp, FlipProp } from '@fortawesome/fontawesome-svg-core'
 import { FormEvent, useState } from 'react'
+import Axios from 'axios'
+import { faCheckCircle, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 
 interface InputTypes {
   name: string,
@@ -25,7 +27,6 @@ export default function SignUp() {
     rep_password: '',
   })
   const [error, setError] = useState<String>('')
-  const [result, setResult] = useState<String>('')
   const [formDisabled, setFormDisabled] = useState<Boolean>(false)
 
   const input: InputTypes[] = [
@@ -58,7 +59,6 @@ export default function SignUp() {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValues({ ...values, [e.target.name]: e.target.value })
     setError('')
-    setResult('')
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -66,10 +66,46 @@ export default function SignUp() {
     setFormDisabled(true)
     const email = values.email
     const password = values.password
+    const rep_password = values.rep_password
     if (typeof email === 'string' && email.length > 3 && email.length <= 50 && email.match('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')) {
-      if (typeof password === "string" && password.length >= 8 && password.length <= 18) {
-
+      if (typeof password === 'string' && password.length >= 8 && password.length <= 18) {
+        if (typeof rep_password === 'string' && password === rep_password) {
+          Axios.post(`${import.meta.env.VITE_SERVER_URL}/signup`, { email: email, password: password })
+            .then((result) => {
+              const data = result.data
+              setFormDisabled(false)
+              setError(data.message)
+              setTimeout(() => {
+                setError('')
+              }, 2000)
+              if (data.type === 1) {
+                setValues({
+                  email: '',
+                  password: '',
+                  rep_password: '',
+                })
+              }
+            })
+        } else {
+          setFormDisabled(false)
+          setError('Passwords do not match')
+          setTimeout(() => {
+            setError('')
+          }, 2000)
+        }
+      } else {
+        setFormDisabled(false)
+        setError('Password format is invalid')
+        setTimeout(() => {
+          setError('')
+        }, 2000)
       }
+    } else {
+      setFormDisabled(false)
+      setError('Email format is invalid')
+      setTimeout(() => {
+        setError('')
+      }, 2000)
     }
   }
 
@@ -90,8 +126,18 @@ export default function SignUp() {
               </div>
             </div>
           ))}
-          <button className={FormCSS.button} style={{ width: '140px', height: '50px' }}>SIGN IN</button>
+          {formDisabled ? <button className={FormCSS.button} disabled style={{ width: '140px', height: '50px', paddingTop: '5px' }}><FontAwesomeIcon icon={faRotate} spin /></button> :
+            <button className={FormCSS.button} type='submit' style={{ width: '140px', height: '50px' }}>SIGN UP</button>}
         </form>
+        <div className={CSS.error}>
+          {error.length > 0 && <>
+            {error === 'Successfully created an account' ? <FontAwesomeIcon icon={faCheckCircle} flip className={CSS.errorIcon} /> :
+              <FontAwesomeIcon icon={faCircleXmark} flip className={CSS.errorIcon} />}
+          </>}
+          <div>
+            {error}
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -78,12 +78,12 @@
 }
 
 .error {
-  font-size: 13px;
+  font-size: 14px;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 600;
   margin: auto;
   margin-top: 10px;
-  width: 260px;
+  width: 280px;
 }
 
 .input:valid~div span {

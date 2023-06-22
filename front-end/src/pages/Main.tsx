@@ -1,6 +1,6 @@
 import SignIn from "../components/SignIn";
 import '../App.css'
-import logo from '../../public/netnote.png'
+import logo from '/netnote.png'
 import SignUp from "../components/SignUp";
 
 export default function Main() {
