@@ -31,7 +31,6 @@ export default function Main() {
 
   return (
     <div className='main'>
-      {import.meta.env.VITE_SERVER_URL}
       {(page === 0) && <>
         <SignIn handleSignIn={handleSignIn}/>
         <div className='center'>
