@@ -12,13 +12,13 @@ const prisma = new PrismaClient()
 const app = express()
 app.use(express.json());
 
-// app.use(cors({
-//   origin: [process.env.CLIENT_URL],
-//   methods: ['GET', 'POST'],
-//   credentials: true
-// }))
-// app.use(cookieParser())
-// app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors({
+  origin: [process.env.CLIENT_URL],
+  methods: ['GET', 'POST'],
+  credentials: true
+}))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // interface AuthTypes {
 //   email: string,
