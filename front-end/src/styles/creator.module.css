@@ -1,0 +1,145 @@
+.main{
+  margin-left: 100px;
+  margin-top: 80px;
+  width: 1000px;
+  height: 760px;
+  text-align: center;
+}
+
+.form{
+  position:relative;
+}
+
+.form i {
+  position:absolute;
+  top: 3px;
+  right: 600px;
+  font-size: 20px;
+  padding:10px 10px;
+  color:#ffdb4d;
+}
+
+.input{
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #fff5cc;
+  background-color: #1a1a1a;
+  outline: none;
+  padding-left: 60px;
+  padding-right: 30px;
+  color: white;
+  font-size: 20px;
+  box-sizing: border-box;
+  font-family: 'Courier New';
+  font-weight: bold;
+}
+
+.input:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 2px #fff5cc);
+}
+
+.input:focus{
+  filter: drop-shadow(0 0 5px #ffcc00);
+  border-color: #ffdb4d;
+}
+
+.input::placeholder{
+  color: #bfbfbf;
+}
+
+.input:hover::placeholder{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: #ffdb4d;
+}
+
+.input:focus::placeholder{
+  color: white;
+}
+
+.textaea textarea{
+  margin-top: 15px;
+  width: 1000px;
+  height: 600px;
+  border-radius: 10px;
+  border: 1px solid #fff5cc;
+  background-color: #1a1a1a;
+  outline: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  color: white;
+  resize: none;
+  text-align: justify;
+  box-sizing: border-box;
+}
+
+.textaea textarea:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 2px #fff5cc);
+}
+
+.textaea textarea:focus{
+  filter: drop-shadow(0 0 5px #ffcc00);
+  border-color: #ffdb4d;
+}
+
+.textaea textarea::placeholder{
+  color: #bfbfbf;
+}
+
+.textaea textarea:focus::placeholder{
+  color: white;
+}
+
+.footer{
+  width: 1000px;
+  height: 60px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button{
+  width: 200px;
+  height: 50px;
+  margin-top: 16px;
+  font-size: 20px;
+  outline: none;
+  font-family: 'Courier New';
+  font-weight: bold;
+  background-color: #1a1a1a;
+  color: #ffdb4d;
+  border: 1px solid #ffdb4d;
+  border-radius: 5px;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.button:disabled {
+  background-color: #2d2d2d;
+  color: gray;
+  border: 1px solid gray;
+}
+
+.button:not(:disabled):hover {
+  cursor: pointer;
+  background-color: #2d2d2d;
+  color: white;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}

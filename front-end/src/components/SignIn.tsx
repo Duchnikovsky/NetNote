@@ -20,7 +20,11 @@ interface Values {
   [key: string]: string,
 }
 
-export default function SignIn() {
+interface Props {
+  handleSignIn: () => void
+}
+
+export default function SignIn({ handleSignIn }: Props) {
   const [values, setValues] = useState<Values>({
     email: '',
     password: '',
@@ -59,13 +63,16 @@ export default function SignIn() {
     const password = values.password
     if (typeof email === 'string' && email.length > 3 && email.length <= 50 && email.match('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')) {
       if (typeof password === "string" && password.length >= 8 && password.length <= 18) {
-        Axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`, { email: email, password: password })
+        Axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`, { email: email, password: password }, { withCredentials: true })
           .then((result) => {
             const data = result.data
             setFormDisabled(false)
             setError(data.message)
             setTimeout(() => {
               setError('')
+              if(data.type === 1){
+                handleSignIn()
+              }
             }, 2000)
             if (data.type === 1) {
               setValues({

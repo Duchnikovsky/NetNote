@@ -21,7 +21,7 @@ html, body{
 
 .main{
   width: 1500px;
-  height: 100%;
+  height: auto;
   margin: auto;
   text-align: left;
   display: flex;
