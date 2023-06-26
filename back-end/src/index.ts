@@ -54,7 +54,7 @@ interface NoteTypes {
   content: string,
 }
 
-interface UpdateTypes{
+interface UpdateTypes {
   id: string,
   title: string,
   content: string,
@@ -125,6 +125,7 @@ app.post('/signin', async (req: Request, res: Response) => {
       );
       res.cookie('token', token, {
         sameSite: "none",
+        domain: "netnote-api.vercel.app",
         secure: true,
         httpOnly: true,
         maxAge: 36000000,
@@ -240,19 +241,19 @@ app.post('/removeDirectory', async (req: Request, res: Response) => {
       directoryId: directory,
     }
   })
-  if(removeNotes){
+  if (removeNotes) {
     const removeDirectory = await prisma.directory.delete({
       where: {
         id: directory,
       }
     })
-    if(removeDirectory){
-      return res.send({type: 1})
-    }else{
-      return res.send({type: 0})
+    if (removeDirectory) {
+      return res.send({ type: 1 })
+    } else {
+      return res.send({ type: 0 })
     }
-  }else{
-    return res.send({type: 0})
+  } else {
+    return res.send({ type: 0 })
   }
 })
 
@@ -275,6 +276,14 @@ app.post('/updateNote', async (req: Request, res: Response) => {
   } else {
     return res.send({ type: 0 })
   }
+})
+
+app.post('/signOut', async (req: Request, res: Response) => {
+  const token = req.cookies.token;
+  if(token){
+    res.clearCookie('token');
+  }
+  return res.send({type: 1})
 })
 
 async function cleanup() {
