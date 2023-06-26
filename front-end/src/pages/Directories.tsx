@@ -105,6 +105,15 @@ export default function Directories({ redirectToAuth }: Props) {
     setOperation(0)
   }
 
+  function signOut(){
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/signOut`,{},{withCredentials: true})
+    .then((result) => {
+      if(result){
+        redirectToAuth()
+      }
+    })
+  }
+
   return (
     <div className={CSS.main}>
       <div className={CSS.list}>
@@ -132,7 +141,7 @@ export default function Directories({ redirectToAuth }: Props) {
         <div>
           <div className={CSS.loggedAs}>Logged as:</div>
           <div className={CSS.loggedAsName}>{userData.email}</div>
-          <button className={CSS.button}>Sign out</button>
+          <button className={CSS.button} onClick={signOut}>Sign out</button>
         </div>
       </div>
       {(operation === 1) && <NewDir hide={newDirectoryHandler} userData={userData} />}

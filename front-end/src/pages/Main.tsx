@@ -31,15 +31,14 @@ export default function Main() {
 
   return (
     <div className='main'>
-      {(page === 0) ? <>
+      {(page === 0) && <>
         <SignIn handleSignIn={handleSignIn}/>
         <div className='center'>
           <img src={logo} className="logo" alt="NetNote" />
         </div>
         <SignUp />
-      </> : <>
-        <Directories redirectToAuth={redirectToAuth}/>
       </>}
+      {(page === 1) && <Directories redirectToAuth={redirectToAuth}/>}
     </div>
   )
 }

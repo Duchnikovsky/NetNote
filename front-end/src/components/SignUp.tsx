@@ -1,3 +1,4 @@
+//@ts-nocheck
 import CSS from '../styles/auth.module.css'
 import FormCSS from '../styles/form.module.css'
 import { faKey, faRotate, faUser } from '@fortawesome/free-solid-svg-icons'

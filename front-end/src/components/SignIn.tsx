@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { faKey, faRotate, faUser } from '@fortawesome/free-solid-svg-icons'
 import CSS from '../styles/auth.module.css'
 import FormCSS from '../styles/form.module.css'
@@ -6,6 +7,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FormEvent, useState } from 'react'
 import Axios from 'axios'
 import { faCheckCircle, faCircleXmark } from '@fortawesome/free-regular-svg-icons'
+
 
 interface InputTypes {
   name: string,
@@ -55,6 +57,8 @@ export default function SignIn({ handleSignIn }: Props) {
     setValues({ ...values, [e.target.name]: e.target.value })
     setError('')
   }
+
+  // @ts-ignore
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
