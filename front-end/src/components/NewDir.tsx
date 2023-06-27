@@ -40,7 +40,7 @@ export default function NewDir({ hide, userData }: PropsTypes) {
           <input required autoComplete='off' type='text' name='dirName' placeholder='Directory name' pattern='^[A-Za-z0-9]{3,15}$' maxLength={15} className={CSS.input} value={value} onChange={(e) => setValue(e.target.value)} />
           <i><FontAwesomeIcon icon={faPenToSquare} /></i>
         </div>
-        <button type='submit' className={CSS.button}>{loadingButton ? <><FontAwesomeIcon icon={faRotate} spin/></>: <>CREATE DIRECTORY</>}</button>
+        <button type='submit' className={CSS.button}>{loadingButton ? <><FontAwesomeIcon icon={faRotate} spin/></>: <>Create directory</>}</button>
       </form>
     </div>
   )

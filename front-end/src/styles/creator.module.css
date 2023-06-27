@@ -8,6 +8,7 @@
 
 .form{
   position:relative;
+  margin-bottom: 15px;
 }
 
 .form i {
@@ -106,16 +107,85 @@
 
 .footer{
   width: 1000px;
-  height: 60px;
+  height: 50px;
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  font-family: 'Courier New';
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.button{
-  width: 200px;
+.leftFoot{
+  width: 333px;
   height: 50px;
-  margin-top: 16px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  line-height: 50px;
+  border: 1px solid #fff5cc;
+  color: #fff5cc;
+  background-color: #1a1a1a;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.leftFoot:hover{
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 5px #ffcc00);
+}
+
+.centerFoot{
+  width: 334px;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid #fff5cc;
+  color: #fff5cc;
+  background-color: #1a1a1a;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.centerFoot:hover{
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 5px #ffcc00);
+}
+
+.rightFoot{
+  width: 333px;
+  height: 50px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  line-height: 50px;
+  border: 1px solid #fff5cc;
+  color: #fff5cc;
+  background-color: #1a1a1a;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.rightFoot:hover{
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 5px #ffcc00);
+}
+
+
+.button{
+  width: 180px;
+  height: 40px;
   font-size: 20px;
   outline: none;
   font-family: 'Courier New';
@@ -142,4 +212,82 @@
   transition-property: all;
   transition-duration: 300ms;
   transition-timing-function: linear;
+}
+
+.cancelButton{
+  width: 120px;
+  height: 40px;
+  font-size: 20px;
+  outline: none;
+  font-family: 'Courier New';
+  font-weight: bold;
+  background-color: #1a1a1a;
+  color: #ffdb4d;
+  border: 1px solid #ffdb4d;
+  border-radius: 5px;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.cancelButton:disabled {
+  background-color: #2d2d2d;
+  color: gray;
+  border: 1px solid gray;
+}
+
+.cancelButton:not(:disabled):hover {
+  cursor: pointer;
+  background-color: #2d2d2d;
+  color: white;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+
+.leftFootC{
+  width: 500px;
+  height: 50px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  line-height: 50px;
+  border: 1px solid #fff5cc;
+  color: #fff5cc;
+  background-color: #1a1a1a;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.leftFootC:hover{
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 5px #ffcc00);
+}
+
+.rightFootC{
+  width: 500px;
+  height: 50px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  line-height: 50px;
+  border: 1px solid #fff5cc;
+  color: #fff5cc;
+  background-color: #1a1a1a;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.rightFootC:hover{
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  border-color: #ffdb4d;
+  filter: drop-shadow(0 0 5px #ffcc00);
 }

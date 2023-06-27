@@ -93,16 +93,18 @@
 }
 
 .button {
+  border: 0;
   margin-top: 30px;
-  width: 220px;
+  width: 240px;
   height: 50px;
   font-size: 20px;
   outline: none;
   font-family: 'Courier New';
   font-weight: bold;
-  background-color: #1a1a1a;
-  color: #ffdb4d;
-  border: 1px solid #ffdb4d;
+  background-color: #212121;
+  border-left: 1px solid #fff5cc;
+  border-right: 1px solid #fff5cc;
+  color: #fff5cc;
   border-radius: 10px;
   transition-property: all;
   transition-duration: 300ms;
@@ -117,8 +119,7 @@
 
 .button:not(:disabled):hover {
   cursor: pointer;
-  background-color: #2d2d2d;
-  color: white;
+  filter: drop-shadow(0 0 2px #fff5cc);
   transition-property: all;
   transition-duration: 300ms;
   transition-timing-function: linear;

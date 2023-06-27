@@ -147,17 +147,19 @@ hr {
 }
 
 .button {
-  margin-top: 15px;
+  border: 0;
+  margin-top: 10px;
   width: 140px;
   height: 40px;
   font-size: 20px;
   outline: none;
   font-family: 'Courier New';
   font-weight: bold;
-  background-color: #1a1a1a;
-  color: #ffdb4d;
-  border: 1px solid #ffdb4d;
-  border-radius: 5px;
+  background-color: #212121;
+  border-left: 1px solid #fff5cc;
+  border-right: 1px solid #fff5cc;
+  color: #fff5cc;
+  border-radius: 10px;
   transition-property: all;
   transition-duration: 300ms;
   transition-timing-function: linear;
@@ -171,8 +173,7 @@ hr {
 
 .button:not(:disabled):hover {
   cursor: pointer;
-  background-color: #2d2d2d;
-  color: white;
+  filter: drop-shadow(0 0 2px #fff5cc);
   transition-property: all;
   transition-duration: 300ms;
   transition-timing-function: linear;

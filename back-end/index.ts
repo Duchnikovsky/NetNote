@@ -278,6 +278,24 @@ app.post('/updateNote', async (req: Request, res: Response) => {
   }
 })
 
+
+app.post('/removeNote', async (req: Request, res: Response) => {
+  const { id } = req.body
+
+  const remove = await prisma.notes.delete({
+    where: {
+      id: id,
+    },
+  })
+
+  if (remove) {
+    return res.send({ type: 1 })
+  } else {
+    return res.send({ type: 0 })
+  }
+})
+
+
 app.post('/signOut', async (req: Request, res: Response) => {
   const token = req.cookies.token;
   if(token){

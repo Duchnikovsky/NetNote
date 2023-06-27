@@ -30,7 +30,7 @@ export default function Creator({ userData, directory, closeCreator }: PropsType
     title: '',
     content: '',
   })
-  const [confirmRemove, setConfirmRemove] = useState<boolean>(false)
+  const [confirmCancel, setConfirmCancel] = useState<boolean>(false)
   const [loadingButton, setLoadingButton] = useState<boolean>(false)
   
   function createNote() {
@@ -52,7 +52,7 @@ export default function Creator({ userData, directory, closeCreator }: PropsType
 
   return (
     <div className={CSS.main}>
-      <form className={CSS.form}>
+      <form className={CSS.form} onSubmit={(e) => {e.preventDefault()}}>
         <input type='text' name='title' autoComplete='off' value={values.title} onChange={(e) => { setValues((values) => ({ ...values, title: e.target.value })) }} placeholder='Title of note' required pattern='^[A-Za-z0-9]{3,15}$' maxLength={15} className={CSS.input}></input>
         <i><FontAwesomeIcon icon={faPenToSquare} /></i><br></br>
         <div className={CSS.textaea}>
@@ -60,8 +60,8 @@ export default function Creator({ userData, directory, closeCreator }: PropsType
         </div>
       </form>
       <div className={CSS.footer}>
-        {confirmRemove ? <button className={CSS.button} onClick={closeCreator}>Confirm</button> : <button className={CSS.button} onClick={() => setConfirmRemove(true)}>Cancel </button>}
-        <button className={CSS.button} onClick={createNote}>{loadingButton ? <><FontAwesomeIcon icon={faRotate} spin/></>: <>Create note</>}</button>
+        {confirmCancel ? <div className={CSS.leftFootC} onClick={closeCreator}>Confirm</div> : <div className={CSS.leftFootC} onClick={() => setConfirmCancel(true)}>Cancel</div>}
+        {loadingButton ? <div className={CSS.rightFootC}><FontAwesomeIcon icon={faRotate} spin /></div> : <div className={CSS.rightFootC} onClick={createNote}>Create note</div>}
       </div>
     </div>
   )

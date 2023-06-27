@@ -140,7 +140,7 @@ export default function Directories({ redirectToAuth }: Props) {
         <hr className={CSS.hr}></hr>
         <div>
           <div className={CSS.loggedAs}>Logged as:</div>
-          <div className={CSS.loggedAsName}>{userData.email}</div>
+          <div className={CSS.loggedAsName}>{userData.email.substring(0,userData.email.indexOf('@'))}</div>
           <button className={CSS.button} onClick={signOut}>Sign out</button>
         </div>
       </div>
