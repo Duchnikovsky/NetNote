@@ -1,0 +1,77 @@
+.inputContainer{
+  display: flex;
+  align-items: center;
+  background-color: #0b0c10;
+  border-radius: 5px;
+  filter: drop-shadow(1px 1px 2px #2d2d2d);
+  padding: 0 0.5rem;
+  gap: 0.5rem;
+}
+
+.input{
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  border: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  color: white;
+  font-family: inherit;
+  background-color: transparent;
+  letter-spacing: 1px;
+}
+
+.input::placeholder{
+  color: #9e9e9e;
+}
+
+.input:hover {
+  border-color: #ffdb4d;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.button{
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  background-color: #0e0f12;
+  color: #c4c6c8;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  filter: drop-shadow(0px 0px 1px #c4c6c8);
+}
+
+.button:not(:disabled):hover{
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  color: white;
+  background-color: #04050a;
+  filter: drop-shadow(0px 0px 1px #c4c6c8);
+}
+
+.button:disabled{
+  cursor: not-allowed;
+}
+
+.loader{
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
