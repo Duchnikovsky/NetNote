@@ -5,6 +5,7 @@ export interface DecodedTypes {
   iat: number,
   exp: number,
 }
+
 export interface AuthTypes {
   email: string,
   password: string,

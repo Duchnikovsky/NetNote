@@ -7,11 +7,12 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 
 import Providers from "./components/Providers";
+import { ToastContainer } from "react-toastify";
 
 import Root from "./layouts/Root";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
-import { ToastContainer } from "react-toastify";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>
       <Route path="/signIn" element={<SignIn />} />
+      <Route path="/signUp" element={<SignUp />} />
     </>
   )
 );

@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 import { z } from "zod";
 
 import { PrismaClient } from "@prisma/client";
-import { DecodedTypes, AuthTypes } from "./types/types";
+import { DecodedTypes } from "./types/types";
 const prisma = new PrismaClient();
 
 const app = express();
@@ -25,25 +25,27 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 async function getAuthSession(req: Request) {
-  const token = req.cookies.token;
-  if (token) {
-    jwt.verify(
-      token,
-      process.env.SECRET_KEY,
-      (error: string, decoded: DecodedTypes) => {
-        if (error) {
-          return false;
+  return new Promise((resolve, reject) => {
+    const token = req.cookies.token;
+    if (token) {
+      jwt.verify(
+        token,
+        process.env.SECRET_KEY,
+        (error: string, decoded: DecodedTypes) => {
+          if (error) {
+            resolve(false);
+          }
+          if (decoded.authenticated === true) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
         }
-        if (decoded.authenticated === true) {
-          return decoded;
-        } else {
-          return false;
-        }
-      }
-    );
-  } else {
-    return false;
-  }
+      );
+    } else {
+      resolve(false);
+    }
+  });
 }
 
 app.get("/getSession", async (req: Request, res: Response) => {
@@ -52,7 +54,7 @@ app.get("/getSession", async (req: Request, res: Response) => {
   if (session) {
     return res.status(200).send(session);
   } else {
-    return res.status(404).send(session);
+    return res.status(401).send(session);
   }
 });
 
@@ -62,8 +64,15 @@ app.post("/signIn", async (req: Request, res: Response) => {
   try {
     const { email, password } = z
       .object({
-        email: z.string().max(100).min(5),
-        password: z.string().max(18).min(9),
+        email: z
+          .string()
+          .max(100)
+          .min(5, { message: "Email has to be valid" })
+          .email(),
+        password: z
+          .string()
+          .max(18)
+          .min(8, { message: "Password must be between 8-18 characters" }),
       })
       .parse({
         email: body.email,
@@ -73,7 +82,7 @@ app.post("/signIn", async (req: Request, res: Response) => {
     const session = await getAuthSession(req);
 
     if (session) {
-      return res.status(401).send("You are already signed in");
+      return res.status(403).send("You are already signed in");
     }
 
     const user = await prisma.user.findFirst({
@@ -82,11 +91,11 @@ app.post("/signIn", async (req: Request, res: Response) => {
       },
     });
 
-    if (!user) return res.status(422).send("Invalid email or password");
+    if (!user) return res.status(400).send("Invalid email or password");
 
     const comparePass = await bcrypt.compare(password, user.password);
 
-    if (!comparePass) return res.status(422).send("Invalid email or password");
+    if (!comparePass) return res.status(400).send("Invalid email or password");
 
     const token = jwt.sign(
       { authenticated: true, id: user.id, email: user.email },
@@ -95,16 +104,67 @@ app.post("/signIn", async (req: Request, res: Response) => {
     );
     res.cookie("token", token, {
       sameSite: "none",
-      domain: "localhost:3001",
+      // domain: "localhost:3001", // COMMENT
       secure: true,
       httpOnly: true,
       maxAge: 36000000,
+    });
+    return res.status(200).send("ok");
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send("Invalid email or password");
+    }
+    return res.status(500).send("Could not sign in, try again later");
+  }
+});
+
+app.post("/signup", async (req: Request, res: Response) => {
+  const body = await req.body;
+
+  try {
+    const { email, password } = z
+      .object(
+        {
+          email: z
+            .string()
+            .max(100)
+            .min(5, { message: "Email has to be valid" })
+            .email(),
+          password: z
+            .string()
+            .max(18)
+            .min(8, { message: "Password must be between 8-18 characters" }),
+        },
+        { description: "ahaha" }
+      )
+      .parse({
+        email: body.email,
+        password: body.password,
+      });
+
+    const user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+
+    if (user) {
+      return res.status(406).send("This email is already taken");
+    }
+
+    const hashedPass = await bcrypt.hash(password, 10);
+
+    const newUser = await prisma.user.create({
+      data: {
+        email: email,
+        password: hashedPass,
+      },
     });
 
     return res.status(200).send("ok");
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(422).send("Invalid email or password");
+      return res.status(400).send(error.errors[0].message);
     }
     return res.status(500).send("Could not sign in, try again later");
   }
