@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 import { z } from "zod";
 
 import { PrismaClient } from "@prisma/client";
-import { DecodedTypes } from "./types/types";
+import { AuthSession, DecodedTypes } from "./types/types";
 const prisma = new PrismaClient();
 
 const app = express();
@@ -24,7 +24,7 @@ app.use(
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-async function getAuthSession(req: Request) {
+async function getAuthSession(req: Request): Promise<AuthSession> {
   return new Promise((resolve, reject) => {
     const token = req.cookies.token;
     if (token) {
@@ -36,7 +36,7 @@ async function getAuthSession(req: Request) {
             resolve(false);
           }
           if (decoded.authenticated === true) {
-            resolve(true);
+            resolve(decoded);
           } else {
             resolve(false);
           }
@@ -50,7 +50,7 @@ async function getAuthSession(req: Request) {
 
 app.get("/getSession", async (req: Request, res: Response) => {
   const session = await getAuthSession(req);
-
+  
   if (session) {
     return res.status(200).send(session);
   } else {
@@ -161,12 +161,67 @@ app.post("/signup", async (req: Request, res: Response) => {
       },
     });
 
+    const newDirectory = await prisma.directory.create({
+      data: {
+        usersId: newUser.id,
+        name: "Main directory",
+      },
+    });
+
     return res.status(200).send("ok");
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).send(error.errors[0].message);
     }
     return res.status(500).send("Could not sign in, try again later");
+  }
+});
+
+app.post("/signOut", async (req: Request, res: Response) => {
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const token = req.cookies.token;
+    if (token) {
+      res.clearCookie("token");
+    }
+
+    return res.status(200).send('OK')
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could sign out, try again later");
+  }
+});
+
+app.get("/getDirectories", async (req: Request, res: Response) => {
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const directories = await prisma.directory.findMany({
+      where: {
+        usersId: session.id,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    return res.status(200).send(JSON.stringify(directories));
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could fetch directories, try again later");
   }
 });
 

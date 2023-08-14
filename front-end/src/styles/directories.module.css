@@ -1,0 +1,100 @@
+.main {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  overflow: scroll;
+}
+
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.loadingArea {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  box-sizing: border-box;
+}
+
+.directory {
+  width: 100%;
+  height: 3.25rem;
+  box-sizing: border-box;
+  padding: 0 1.5em;
+  display: flex;
+  align-items: center;
+  background-color: #0e0f12;
+  font-size: 20px;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.directory:hover {
+  cursor: pointer;
+  background-color: #0b0c10;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.directoryName {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+.directorySelected {
+  width: 100%;
+  height: 3.25rem;
+  box-sizing: border-box;
+  padding: 0 1.5em;
+  display: flex;
+  align-items: center;
+  background-color: #0b0c10;
+  font-size: 20px;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.folder{
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  fill: transparent;
+}
+
+.directorySelected > .folder{
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  fill: #fff5bd;
+}
+
+.loader {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

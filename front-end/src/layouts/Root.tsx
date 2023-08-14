@@ -1,10 +1,10 @@
-import CSS from "../styles/root.module.css";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
 export default function Root() {
   const route = useNavigate();
+  const location = useLocation();
 
   const {} = useQuery({
     queryKey: ["session"],
@@ -12,7 +12,9 @@ export default function Root() {
       try {
         const query = `${import.meta.env.VITE_SERVER_URL}/getSession`;
         const { data } = await axios.get(query, { withCredentials: true });
-        route("/dashboard");
+        if (location.pathname === "/") {
+          route("/dashboard");
+        }
         return data;
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -26,7 +28,7 @@ export default function Root() {
   });
 
   return (
-    <div className={CSS.main}>
+    <div>
       <Outlet />
     </div>
   );

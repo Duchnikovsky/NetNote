@@ -10,3 +10,5 @@ export interface AuthTypes {
   email: string,
   password: string,
 }
+
+export type AuthSession = DecodedTypes | false

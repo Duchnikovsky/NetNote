@@ -13,18 +13,24 @@ import Root from "./layouts/Root";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Creator from "./pages/Creator";
+import Directory from "./pages/Directory";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Root />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/dashboard/create" element={<Creator />} />
+          <Route path=":id" element={<Directory />} />
+        </Route>
       </Route>
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/signUp" element={<SignUp />} />
     </>
   )
 );
+
 
 function App() {
   return (
