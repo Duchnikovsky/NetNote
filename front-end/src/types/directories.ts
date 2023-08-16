@@ -4,3 +4,12 @@ export interface Directory{
   name: string,
   createdAt: Date,
 }
+
+export interface Note{
+  id: string,
+  userId: string,
+  directoryId: string,
+  title: string,
+  content: string,
+  createdAt: Date,
+}

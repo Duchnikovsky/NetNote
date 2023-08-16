@@ -170,7 +170,7 @@ export default function SignUp() {
               pattern={input.pattern}
               maxLength={input.maxlenght}
               isDisabled={false}
-              width="70%"
+              width="75%"
               height="2.5rem"
               fontSize="16px"
               icon={input.icon}
@@ -184,7 +184,7 @@ export default function SignUp() {
             isLoading={isLoading}
             isDisabled={isSuccess}
             fontSize="18px"
-            width="70%"
+            width="75%"
             height="2.25rem"
             type="submit"
           >

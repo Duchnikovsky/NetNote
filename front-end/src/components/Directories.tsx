@@ -4,12 +4,12 @@ import axios, { AxiosError } from "axios";
 import { Directory } from "../types/directories";
 import { toast } from "react-toastify";
 import { Folder, Loader2 } from "lucide-react";
-import { Button } from "./ui/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Directories() {
   const [selected, setSelected] = useState<string>();
+
   const route = useNavigate();
 
   const {
@@ -59,35 +59,31 @@ export default function Directories() {
 
   return (
     <div className={CSS.main}>
-      {isFetched &&
-        queryResults.flatMap((directory: Directory) => (
-          <div
-            key={directory.id}
-            className={
-              selected === directory.id ? CSS.directorySelected : CSS.directory
-            }
-            onClick={() => {setSelected(directory.id); route(`/dashboard/${directory.id}`)}}
-          >
-            <Folder
-              stroke="#fff5bd"
-              strokeWidth={1.5}
-              size={26}
-              className={CSS.folder}
-            />
-            {directory.name}
-          </div>
-        ))}
-      <Button
-        width="90%"
-        height="2.5rem"
-        fontSize="20px"
-        isDisabled={false}
-        isLoading={false}
-        margin={"1rem auto"}
-        onClick={() => route("/dashboard/create")}
-      >
-        New directory
-      </Button>
+      <div className={CSS.directories}>
+        {isFetched &&
+          queryResults.flatMap((directory: Directory) => (
+            <div
+              key={directory.id}
+              className={
+                selected === directory.id
+                  ? CSS.directorySelected
+                  : CSS.directory
+              }
+              onClick={() => {
+                setSelected(directory.id);
+                route(`/dashboard/${directory.id}`);
+              }}
+            >
+              <Folder
+                stroke="#fff5bd"
+                strokeWidth={1.5}
+                size={26}
+                className={CSS.folder}
+              />
+              {directory.name}
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

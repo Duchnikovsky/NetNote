@@ -1,0 +1,30 @@
+.main{
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+}
+
+
+
+@media(max-width: 768px){
+  .main{
+    width: 100%;
+    margin: 0;
+    grid-template-columns: repeat(1, minmax(0,1fr));
+  }
+}
+
+.loader{
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

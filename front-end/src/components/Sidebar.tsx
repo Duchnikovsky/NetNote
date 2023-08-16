@@ -7,10 +7,13 @@ import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import CreatorModal from "./modals/CreatorModal";
 
 export default function Sidebar() {
-
   const route = useNavigate();
+  const [menu, setOpen] = useState<boolean>(true);
+  const [modal, toggleModal] = useState<boolean>(false)
 
   const { mutate: singOut, isLoading } = useMutation({
     mutationFn: async () => {
@@ -19,7 +22,7 @@ export default function Sidebar() {
         {},
         { withCredentials: true }
       );
-      route('/signIn')
+      route("/signIn");
       return data;
     },
     onError: (err) => {
@@ -64,26 +67,48 @@ export default function Sidebar() {
     },
   });
 
-
-
   return (
-    <div className={CSS.main}>
-      <div className={CSS.logoArea}>
-        <img src={logo} alt="logo" className={CSS.logo} />
+    <div className={menu ? CSS.main : CSS.miniMain}>
+      <div className={CSS.navbar}>
+        <div className={CSS.logoArea}>
+          <img src={logo} alt="logo" className={CSS.logo} />
+        </div>
+        <List
+          size={40}
+          className={CSS.listIcon}
+          onClick={() => setOpen(!menu)}
+        />
       </div>
-      <List size={40} className={CSS.listIcon} />
-      <Directories />
-      <Button
-        width="90%"
-        height="2.5rem"
-        fontSize="20px"
-        isDisabled={false}
-        isLoading={isLoading}
-        margin={"0 auto"}
-        onClick={() => singOut()}
-      >
-        Sign out
-      </Button>
+      {menu && <Directories />}
+      {menu && (
+        <Button
+          width="90%"
+          height="2.5rem"
+          fontSize="20px"
+          isDisabled={false}
+          isLoading={false}
+          margin={"0 auto"}
+          onClick={() => toggleModal(true)}
+        >
+          New directory
+        </Button>
+      )}
+      {menu && (
+        <div className={CSS.buttonArea}>
+          <Button
+            width="90%"
+            height="2.5rem"
+            fontSize="20px"
+            isDisabled={false}
+            isLoading={isLoading}
+            margin={"0 auto"}
+            onClick={() => singOut()}
+          >
+            Sign out
+          </Button>
+        </div>
+      )}
+      {modal && <CreatorModal toggleModal={() => toggleModal(!modal)}/>}
     </div>
   );
 }

@@ -1,19 +1,31 @@
 .main {
   width: 100%;
-  height: 80vh;
+  height: auto;
+  max-height: 39rem;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
-  overflow: scroll;
 }
 
-.main::-webkit-scrollbar {
-  display: none;
+.directories{
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
-.main::-webkit-scrollbar-track {
+.directories::-webkit-scrollbar {
+  width: 0.15rem;
+}
+
+.directories::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.directories::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
 
 .loadingArea {
   width: 100%;
@@ -31,18 +43,19 @@
   padding: 0 1.5em;
   display: flex;
   align-items: center;
-  background-color: #0e0f12;
+  background-color: #0b0c10;
   font-size: 20px;
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: linear;
   justify-content: center;
   gap: 1rem;
+  text-shadow: 0 0 0.5rem white;
 }
 
 .directory:hover {
   cursor: pointer;
-  background-color: #0b0c10;
+  background-color: #0e0f12;
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: linear;
@@ -62,13 +75,14 @@
   padding: 0 1.5em;
   display: flex;
   align-items: center;
-  background-color: #0b0c10;
+  background-color: #0e0f12;
   font-size: 20px;
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: linear;
   justify-content: center;
   gap: 1rem;
+  text-shadow: 0 0 0.75rem #fff5cc;
 }
 
 .folder{
@@ -76,6 +90,7 @@
   transition-duration: 200ms;
   transition-timing-function: linear;
   fill: transparent;
+  filter: drop-shadow(0 0 0.25rem white);
 }
 
 .directorySelected > .folder{
@@ -83,6 +98,7 @@
   transition-duration: 200ms;
   transition-timing-function: linear;
   fill: #fff5bd;
+  filter: drop-shadow(0 0 0.5rem #fff5cc);
 }
 
 .loader {
