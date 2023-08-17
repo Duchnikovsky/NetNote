@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [process.env.CLIENT_URL],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -259,7 +259,9 @@ app.get("/getDirectory", async (req: Request, res: Response) => {
       },
     });
 
-    return res.status(200).send(JSON.stringify(notes));
+    return res
+      .status(200)
+      .send(JSON.stringify({ notes: notes, directory: directory }));
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).send(error.errors[0].message);
@@ -300,10 +302,94 @@ app.post("/createDirectory", async (req: Request, res: Response) => {
     return res.status(200).send("ok");
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.log(error)
       return res.status(400).send(error.errors[0].message);
     }
     return res.status(500).send("Could fetch directory, try again later");
+  }
+});
+
+app.put("/editDirectory", async (req: Request, res: Response) => {
+  const body = await req.body;
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const { id, name } = z
+      .object({
+        id: z.string(),
+        name: z
+          .string()
+          .min(3, { message: "Directory name must be between 3-16 characters" })
+          .max(16, {
+            message: "Directory name must be between 3-16 characters",
+          }),
+      })
+      .parse({
+        id: body.id,
+        name: body.name,
+      });
+
+    await prisma.directory.update({
+      data: {
+        name: name,
+      },
+      where: {
+        id: id,
+      },
+    });
+
+    return res.status(200).send("ok");
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could update directory, try again later");
+  }
+});
+
+app.delete("/removeDirectory", async (req: Request, res: Response) => {
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const id = req.query.id;
+
+    if (id === undefined) {
+      return res.status(404).send("An error occured");
+    }
+
+    const directory = await prisma.directory.findFirst({
+      where: {
+        id: id.toString(),
+      },
+    });
+
+    if (!directory) {
+      return res.status(411).send("There is not such directory");
+    }
+
+    if (directory?.usersId !== session.id) {
+      return res.status(401).send("You are not owner of this directory");
+    }
+
+    await prisma.directory.delete({
+      where: {
+        id: id.toString(),
+      },
+    });
+
+    return res.status(200).send("ok");
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could not remove directory, try again later");
   }
 });
 

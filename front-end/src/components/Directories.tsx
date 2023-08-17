@@ -14,7 +14,6 @@ export default function Directories() {
 
   const {
     data: queryResults,
-    isFetched,
     isLoading,
   } = useQuery({
     queryKey: ["get-directories"],
@@ -50,6 +49,8 @@ export default function Directories() {
     },
   });
 
+  const directories = queryResults?.flatMap((directory:Directory) => directory) || []
+
   if (isLoading)
     return (
       <div className={CSS.loadingArea}>
@@ -60,8 +61,8 @@ export default function Directories() {
   return (
     <div className={CSS.main}>
       <div className={CSS.directories}>
-        {isFetched &&
-          queryResults.flatMap((directory: Directory) => (
+        {
+          directories.flatMap((directory: Directory) => (
             <div
               key={directory.id}
               className={

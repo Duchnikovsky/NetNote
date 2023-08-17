@@ -13,6 +13,7 @@
   flex-direction: column;
   gap: 1rem;
   min-height: 54rem;
+  z-index: 200;
 }
 
 .logoArea {
@@ -68,7 +69,7 @@
   .logoArea {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .logo {

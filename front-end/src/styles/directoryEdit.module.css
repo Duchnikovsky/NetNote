@@ -1,0 +1,26 @@
+.main{
+  width: 30rem;
+  height: 20rem;
+  background-color: transparent;
+  margin: 15rem auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+
+.upperText{
+  color: #fff5cc;
+  filter: drop-shadow(0 0 0.25rem #fff5cc);
+  font-size: 25px;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+}
+
+@media(max-width:768px){
+  .main{
+    width: 100vw;
+  }
+}

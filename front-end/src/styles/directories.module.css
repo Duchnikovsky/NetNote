@@ -29,7 +29,7 @@
 
 .loadingArea {
   width: 100%;
-  height: 80vh;
+  height: auto;
   display: flex;
   justify-content: center;
   padding-top: 1rem;
@@ -50,7 +50,7 @@
   transition-timing-function: linear;
   justify-content: center;
   gap: 1rem;
-  text-shadow: 0 0 0.5rem white;
+  text-shadow: 0 0 1rem white;
 }
 
 .directory:hover {
