@@ -26,7 +26,6 @@
   background: transparent;
 }
 
-
 .loadingArea {
   width: 100%;
   height: auto;
@@ -48,8 +47,7 @@
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: linear;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: flex-start;
   text-shadow: 0 0 1rem white;
 }
 
@@ -61,10 +59,20 @@
   transition-timing-function: linear;
 }
 
+.folderArea{
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  
+}
+
 .directoryName {
-  width: 100%;
+  width: 85%;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 
@@ -80,8 +88,7 @@
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: linear;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: flex-start;
   text-shadow: 0 0 0.75rem #fff5cc;
 }
 
@@ -93,7 +100,7 @@
   filter: drop-shadow(0 0 0.25rem white);
 }
 
-.directorySelected > .folder{
+.directorySelected > .folderArea > .folder{
   transition-property: all;
   transition-duration: 200ms;
   transition-timing-function: linear;

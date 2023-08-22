@@ -190,7 +190,7 @@ export default function DirectoryModal({
             fontSize="18px"
             width="70%"
             height="2.5rem"
-            type="submit"
+            type="button"
             onClick={() => toggleConfirm(true)}
           >
             Remove directory
@@ -202,7 +202,7 @@ export default function DirectoryModal({
           fontSize="18px"
           width="70%"
           height="2.5rem"
-          type="submit"
+          type="button"
           onClick={() => toggleModal()}
         >
           Close settings

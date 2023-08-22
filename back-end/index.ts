@@ -257,6 +257,9 @@ app.get("/getDirectory", async (req: Request, res: Response) => {
       where: {
         directoryId: id.toString(),
       },
+      orderBy: {
+        createdAt: 'desc',
+      }
     });
 
     return res

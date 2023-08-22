@@ -12,10 +12,7 @@ export default function Directories() {
 
   const route = useNavigate();
 
-  const {
-    data: queryResults,
-    isLoading,
-  } = useQuery({
+  const { data: queryResults, isLoading } = useQuery({
     queryKey: ["get-directories"],
     queryFn: async () => {
       try {
@@ -49,7 +46,8 @@ export default function Directories() {
     },
   });
 
-  const directories = queryResults?.flatMap((directory:Directory) => directory) || []
+  const directories =
+    queryResults?.flatMap((directory: Directory) => directory) || [];
 
   if (isLoading)
     return (
@@ -61,29 +59,28 @@ export default function Directories() {
   return (
     <div className={CSS.main}>
       <div className={CSS.directories}>
-        {
-          directories.flatMap((directory: Directory) => (
-            <div
-              key={directory.id}
-              className={
-                selected === directory.id
-                  ? CSS.directorySelected
-                  : CSS.directory
-              }
-              onClick={() => {
-                setSelected(directory.id);
-                route(`/dashboard/${directory.id}`);
-              }}
-            >
+        {directories.flatMap((directory: Directory) => (
+          <div
+            key={directory.id}
+            className={
+              selected === directory.id ? CSS.directorySelected : CSS.directory
+            }
+            onClick={() => {
+              setSelected(directory.id);
+              route(`/dashboard/${directory.id}`);
+            }}
+          >
+            <div className={CSS.folderArea}>
               <Folder
                 stroke="#fff5bd"
                 strokeWidth={1.5}
                 size={26}
                 className={CSS.folder}
               />
-              {directory.name}
             </div>
-          ))}
+            <div className={CSS.directoryName}>{directory.name}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

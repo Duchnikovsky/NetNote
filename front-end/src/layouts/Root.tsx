@@ -6,7 +6,7 @@ export default function Root() {
   const route = useNavigate();
   const location = useLocation();
 
-  const {} = useQuery({
+  const { data } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
       try {

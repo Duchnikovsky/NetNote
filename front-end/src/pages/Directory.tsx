@@ -3,10 +3,13 @@ import CSS from "../styles/directory.module.css";
 import { useNavigate, useParams } from "react-router";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { AlignJustify, LayoutPanelTop, Loader2, Settings } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Directory, Note } from "../types/directories";
 import { useEffect, useState } from "react";
 import DirectoryModal from "../components/modals/DirectoryModal";
+import NotesHeader from "../components/NotesHeader";
+import GridNote from "../components/GridNote";
+import ListNote from "../components/ListNote";
 
 interface ApiResponse {
   notes: Note[];
@@ -112,55 +115,47 @@ export default function DirectoryComponent() {
 
   return (
     <div className={CSS.main}>
-      <div className={CSS.grid}>
-        <div className={CSS.header}>
-          <div className={CSS.name}>
-            {directoryName}
-            <Settings
-              className={CSS.settings}
-              onClick={() => toggleModal(true)}
-            />
-          </div>
-          <div className={CSS.modes}>
-            <AlignJustify
-              className={mode === "list" ? CSS.modeActive : CSS.mode}
-              onClick={() => {
-                setMode("list");
-                localStorage.setItem("notesmode", "list");
-              }}
-            />
-            <LayoutPanelTop
-              className={mode === "grid" ? CSS.modeActive : CSS.mode}
-              onClick={() => {
-                setMode("grid");
-                localStorage.setItem("notesmode", "grid");
-              }}
-            />
+      {mode === "grid" && (
+        <div className={CSS.grid}>
+          <NotesHeader
+            mode={"grid"}
+            name={directoryName}
+            toggleModal={(bool) => toggleModal(bool)}
+            setMode={(mode) => setMode(mode)}
+          />
+          {notes.flatMap((note: Note) => (
+            <GridNote note={note} />
+          ))}
+          <div className={CSS.newNote}>
+            <div className={CSS.noteTitle}>New note</div>
+            <div className={CSS.noteContent}>Click here to create new note</div>
           </div>
         </div>
-        <div className={CSS.gridElement}>aaa</div>
-        <div className={CSS.gridElement}>bbb</div>
-        <div className={CSS.gridElement}>ccc</div>
-        <div className={CSS.gridElement}>ddd</div>
-        <div className={CSS.gridElement}>eee</div>
-        <div className={CSS.gridElement}>aaa</div>
-        <div className={CSS.gridElement}>bbb</div>
-        <div className={CSS.gridElement}>ccc</div>
-        <div className={CSS.gridElement}>ddd</div>
-        <div className={CSS.gridElement}>eee</div>
-        <div className={CSS.gridElement}>aaa</div>
-        <div className={CSS.gridElement}>bbb</div>
-        <div className={CSS.gridElement}>ccc</div>
-        <div className={CSS.gridElement}>ddd</div>
-        <div className={CSS.gridElement}>eee</div>
-        <div className={CSS.gridElement}>bbb</div>
-        <div className={CSS.gridElement}>ccc</div>
-        <div className={CSS.gridElement}>ddd</div>
-        <div className={CSS.gridElement}>eee</div>
-        {notes.flatMap((note: Note) => (
-          <div key={note.id}></div>
-        ))}
-      </div>
+      )}
+      {mode === "list" && (
+        <ul className={CSS.list}>
+          <NotesHeader
+            mode={"list"}
+            name={directoryName}
+            toggleModal={(bool) => toggleModal(bool)}
+            setMode={(mode) => setMode(mode)}
+          />
+          <li className={CSS.listHeader}>
+            <div className={CSS.listTitle}>Title</div>
+            <div className={CSS.listContent}>Content</div>
+            <div className={CSS.listCreateDate}>Creation time</div>
+          </li>
+          {notes.flatMap((note: Note) => (
+            <ListNote note={note} />
+          ))}
+          <li className={CSS.listItem}>
+            <div className={CSS.listTitle}>New note</div>
+            <div className={CSS.listContentCut} style={{ color: "#bcbcbc" }}>
+              Click here to create new note
+            </div>
+          </li>
+        </ul>
+      )}
       {modal && (
         <DirectoryModal
           toggleModal={() => toggleModal(!modal)}

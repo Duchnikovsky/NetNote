@@ -11,13 +11,14 @@
 
 .grid {
   width: auto;
-  height: 860px;
+  height: auto;
+  max-height: 860px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   column-gap: 1rem;
   row-gap: 1rem;
   margin: 0 auto;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   padding: 5px;
 }
@@ -46,20 +47,19 @@
   box-sizing: border-box;
 }
 
-.name{
+.name {
   text-shadow: 0 0 0.2rem white;
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.settings{
-  padding-top: 0.45rem;
+.settings {
   stroke-width: 1.5;
   filter: drop-shadow(0 0 0.05rem #fff5cc);
 }
 
-.settings:hover{
+.settings:hover {
   cursor: pointer;
   stroke-width: 2;
 }
@@ -91,18 +91,188 @@
   background-color: #1e212d;
 }
 
-.gridElement {
+.note {
   width: 350px;
   height: 200px;
+  background-color: #0b0c10;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  word-break: break-all;
+  filter: drop-shadow(0 0 0.1rem #fff5cc);
+}
+
+.note:hover {
+  cursor: pointer;
+  filter: drop-shadow(0 0 0.2rem #fff5cc);
+}
+
+
+.newNote {
+  width: 350px;
+  height: 200px;
+  background-color: #0b0c10;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  word-break: break-all;
+  filter: drop-shadow(0 0 0.1rem #fff5cc);
+}
+
+.newNote:hover {
+  cursor: pointer;
+  filter: drop-shadow(0 0 0.2rem #fff5cc);
+}
+
+
+.noteTitle {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 0.05rem #fff5cc);
+}
+
+.newNoteTitle {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 0.05rem #fff5cc);
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.noteContent {
+  width: 100%;
+  height: 150px;
+  text-align: justify;
+  font-size: 14px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  color: #bcbcbc;
+}
+
+
+.newNoteContent {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: rgb(188, 188, 188);
+}
+
+.list {
+  width: 100%;
+  height: auto;
+  max-height: 860px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.list::-webkit-scrollbar {
+  width: 0.15rem;
+}
+
+.list::-webkit-scrollbar-track {
+  background: black;
+  margin-top: 4.75rem;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+.listHeader {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+}
+
+.listTitle {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 0 0.5rem #fff5cc;
+  font-size: inherit;
+}
+
+.listContent {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 0 0.5rem #fff5cc;
+  font-size: inherit;
+}
+
+.listContentCut {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 0 0.25rem #fff5cc;
+  font-size: inherit;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.listCreateDate {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 0 0.5rem #fff5cc;
+  font-size: inherit;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.listItem {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 0.75rem;
+
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  background-color: inherit;
+}
+
+.listItem:hover {
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  background-color: #111214;
 }
 
 @media(max-width: 768px) {
   .main {
     margin: 0;
+    padding: 20px 10px;
   }
 
   .grid {
-    margin: 0;
+    margin: 0 auto;
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
@@ -140,6 +310,27 @@
 
   .header {
     grid-column: span 1 / span 1;
+    order: -9999;
+  }
+
+  .newNote{
+    order: -1000;
+  }
+
+  .listTitle {
+    width: 30%;
+  }
+
+  .listContent {
+    width: 70%;
+  }
+
+  .listContentCut {
+    width: 70%;
+  }
+
+  .listCreateDate {
+    display: none;
   }
 }
 

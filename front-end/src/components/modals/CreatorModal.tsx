@@ -111,7 +111,7 @@ export default function CreatorModal({ toggleModal }: CreatorModalProps) {
         fontSize="18px"
         width="70%"
         height="2.5rem"
-        type="submit"
+        type="button"
         onClick={() => toggleModal()}
       >
         Close creator
