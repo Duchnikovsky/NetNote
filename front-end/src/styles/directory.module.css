@@ -130,9 +130,15 @@
   height: 30px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 20px;
   letter-spacing: 2px;
   filter: drop-shadow(0 0 0.05rem #fff5cc);
+}
+
+.more:hover {
+  cursor: pointer;
+  filter: drop-shadow(0 0 0.1rem #fff5cc);
 }
 
 .newNoteTitle {
@@ -206,21 +212,24 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   text-shadow: 0 0 0.5rem #fff5cc;
   font-size: inherit;
 }
 
 .listContent {
-  width: 50%;
+  width: 55%;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  padding: 0;
   text-shadow: 0 0 0.5rem #fff5cc;
   font-size: inherit;
 }
 
 .listContentCut {
-  width: 50%;
+  width: 55%;
   height: 80%;
   display: flex;
   align-items: center;
@@ -233,7 +242,7 @@
 }
 
 .listCreateDate {
-  width: 25%;
+  width: 15%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -241,6 +250,13 @@
   font-size: inherit;
   padding-left: 10px;
   box-sizing: border-box;
+}
+
+.listMore{
+  width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .listItem {
@@ -302,6 +318,23 @@
   }
 }
 
+@media(max-width:1400px){
+  .listTitle{
+    width: 25%;
+  }
+  .listContent{
+    width: 65%;
+  }
+  .listContentCut{
+    width: 65%;
+  }
+  .listMore{
+    width: 10%;
+  }
+  .listCreateDate {
+    display: none;
+  }
+}
 
 @media(max-width: 1180px) {
   .grid {
@@ -313,24 +346,8 @@
     order: -9999;
   }
 
-  .newNote{
+  .newNote {
     order: -1000;
-  }
-
-  .listTitle {
-    width: 30%;
-  }
-
-  .listContent {
-    width: 70%;
-  }
-
-  .listContentCut {
-    width: 70%;
-  }
-
-  .listCreateDate {
-    display: none;
   }
 }
 

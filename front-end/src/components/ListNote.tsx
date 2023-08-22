@@ -1,3 +1,4 @@
+import { MoreHorizontal } from "lucide-react";
 import CSS from "../styles/directory.module.css";
 import { Note } from "../types/directories";
 
@@ -14,6 +15,9 @@ export default function ListNote({ note }: ListNoteProps) {
       <div className={CSS.listTitle}>{note.title}</div>
       <div className={CSS.listContentCut}>{note.content}</div>
       <div className={CSS.listCreateDate}>{formattedDate}</div>
+      <div className={CSS.listMore}>
+        <MoreHorizontal className={CSS.more} />
+      </div>
     </li>
   );
 }

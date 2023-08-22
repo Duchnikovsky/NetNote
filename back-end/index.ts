@@ -258,8 +258,8 @@ app.get("/getDirectory", async (req: Request, res: Response) => {
         directoryId: id.toString(),
       },
       orderBy: {
-        createdAt: 'desc',
-      }
+        createdAt: "desc",
+      },
     });
 
     return res
@@ -307,7 +307,7 @@ app.post("/createDirectory", async (req: Request, res: Response) => {
     if (error instanceof z.ZodError) {
       return res.status(400).send(error.errors[0].message);
     }
-    return res.status(500).send("Could fetch directory, try again later");
+    return res.status(500).send("Could create directory, try again later");
   }
 });
 
@@ -381,6 +381,12 @@ app.delete("/removeDirectory", async (req: Request, res: Response) => {
       return res.status(401).send("You are not owner of this directory");
     }
 
+    await prisma.notes.deleteMany({
+      where: {
+        directoryId: id.toString(),
+      },
+    });
+
     await prisma.directory.delete({
       where: {
         id: id.toString(),
@@ -393,6 +399,53 @@ app.delete("/removeDirectory", async (req: Request, res: Response) => {
       return res.status(400).send(error.errors[0].message);
     }
     return res.status(500).send("Could not remove directory, try again later");
+  }
+});
+
+app.post("/createNote", async (req: Request, res: Response) => {
+  const body = await req.body;
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const { id, title, content } = z
+      .object({
+        id: z.string(),
+        title: z
+          .string()
+          .min(3, { message: "Note title must be between 3-16 characters" })
+          .max(16, {
+            message: "Note title must be between 3-16 characters",
+          }),
+        content: z
+          .string()
+          .min(1, { message: "Note can't be empty" })
+          .max(1000, { message: "Note can't be longer than 1000 characters" }),
+      })
+      .parse({
+        id: body.directoryId,
+        title: body.title,
+        content: body.content,
+      });
+
+    await prisma.notes.create({
+      data: {
+        title: title,
+        content: content,
+        directoryId: id,
+        usersId: session.id,
+      },
+    });
+
+    return res.status(200).send("ok");
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could create note, try again later");
   }
 });
 

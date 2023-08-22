@@ -10,6 +10,7 @@ import DirectoryModal from "../components/modals/DirectoryModal";
 import NotesHeader from "../components/NotesHeader";
 import GridNote from "../components/GridNote";
 import ListNote from "../components/ListNote";
+import NoteCreatorModal from "../components/modals/NoteCreatorModal";
 
 interface ApiResponse {
   notes: Note[];
@@ -19,6 +20,7 @@ interface ApiResponse {
 export default function DirectoryComponent() {
   const [mode, setMode] = useState<string>("");
   const [modal, toggleModal] = useState<boolean>(false);
+  const [editorModal, toggleEditorModal] = useState<boolean>(false);
   const route = useNavigate();
   const { id } = useParams();
 
@@ -124,9 +126,9 @@ export default function DirectoryComponent() {
             setMode={(mode) => setMode(mode)}
           />
           {notes.flatMap((note: Note) => (
-            <GridNote note={note} />
+            <GridNote note={note} key={note.id} />
           ))}
-          <div className={CSS.newNote}>
+          <div className={CSS.newNote} onClick={() => toggleEditorModal(true)}>
             <div className={CSS.noteTitle}>New note</div>
             <div className={CSS.noteContent}>Click here to create new note</div>
           </div>
@@ -146,9 +148,9 @@ export default function DirectoryComponent() {
             <div className={CSS.listCreateDate}>Creation time</div>
           </li>
           {notes.flatMap((note: Note) => (
-            <ListNote note={note} />
+            <ListNote note={note} key={note.id} />
           ))}
-          <li className={CSS.listItem}>
+          <li className={CSS.listItem} onClick={() => toggleEditorModal(true)}>
             <div className={CSS.listTitle}>New note</div>
             <div className={CSS.listContentCut} style={{ color: "#bcbcbc" }}>
               Click here to create new note
@@ -161,6 +163,9 @@ export default function DirectoryComponent() {
           toggleModal={() => toggleModal(!modal)}
           directory={directory}
         />
+      )}
+      {editorModal && (
+        <NoteCreatorModal toggleModal={() => toggleEditorModal(!editorModal)} directoryId={directory.id}/>
       )}
     </div>
   );

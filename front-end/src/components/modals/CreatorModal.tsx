@@ -56,7 +56,7 @@ export default function CreatorModal({ toggleModal }: CreatorModalProps) {
     },
     onSuccess: () => {
       route(0);
-      toggleModal()
+      toggleModal();
       return toast.success("Directory successfully created", {
         position: "bottom-right",
         autoClose: 3000,
@@ -69,53 +69,53 @@ export default function CreatorModal({ toggleModal }: CreatorModalProps) {
       });
     },
   });
-  
+
   return (
     <div className={MODAL.background}>
       <div className={CSS.main}>
         <div className={CSS.upperText}>Create new directory</div>
         <Input
-        type={"text"}
-        maxLength={16}
-        isDisabled={false}
-        width="70%"
-        height="2.75rem"
-        fontSize="16px"
-        placeholder="Name of directory"
-        spellCheck={false}
-        icon={
-          <FolderEdit
-            stroke="#fff5cc"
-            strokeWidth={1.5}
-            size={22}
-            style={{ paddingTop: "0.25rem" }}
-          />
-        }
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Button
-        isLoading={isLoading}
-        isDisabled={false}
-        fontSize="18px"
-        width="70%"
-        height="2.5rem"
-        type="submit"
-        onClick={() => create()}
-      >
-        Create directory
-      </Button>
-      <Button
-        isLoading={false}
-        isDisabled={false}
-        fontSize="18px"
-        width="70%"
-        height="2.5rem"
-        type="button"
-        onClick={() => toggleModal()}
-      >
-        Close creator
-      </Button>
+          type={"text"}
+          maxLength={16}
+          isDisabled={false}
+          width="70%"
+          height="2.75rem"
+          fontSize="16px"
+          placeholder="Name of directory"
+          spellCheck={false}
+          icon={
+            <FolderEdit
+              stroke="#fff5cc"
+              strokeWidth={1.5}
+              size={22}
+              style={{ paddingTop: "0.25rem" }}
+            />
+          }
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Button
+          isLoading={isLoading}
+          isDisabled={false}
+          fontSize="18px"
+          width="70%"
+          height="2.5rem"
+          type="submit"
+          onClick={() => create()}
+        >
+          Create directory
+        </Button>
+        <Button
+          isLoading={false}
+          isDisabled={false}
+          fontSize="18px"
+          width="70%"
+          height="2.5rem"
+          type="button"
+          onClick={() => toggleModal()}
+        >
+          Close creator
+        </Button>
       </div>
     </div>
   );
