@@ -101,16 +101,9 @@ export default function DirectoryComponent() {
     directoryName = queryResults.directory.name;
   }
 
-  if (isLoading)
+  if (1)
     return (
-      <div
-        className={CSS.main}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
+      <div className={CSS.main}>
         <Loader2 className={CSS.loader} />
       </div>
     );
@@ -165,7 +158,10 @@ export default function DirectoryComponent() {
         />
       )}
       {editorModal && (
-        <NoteCreatorModal toggleModal={() => toggleEditorModal(!editorModal)} directoryId={directory.id}/>
+        <NoteCreatorModal
+          toggleModal={() => toggleEditorModal(!editorModal)}
+          directoryId={directory.id}
+        />
       )}
     </div>
   );

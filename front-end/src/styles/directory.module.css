@@ -386,6 +386,7 @@
 
 .loader {
   animation: spin 1s linear infinite;
+  margin: auto;
 }
 
 @keyframes spin {
