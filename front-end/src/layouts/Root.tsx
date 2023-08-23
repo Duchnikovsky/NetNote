@@ -6,6 +6,7 @@ export default function Root() {
   const route = useNavigate();
   const location = useLocation();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {

@@ -102,9 +102,9 @@ app.post("/signIn", async (req: Request, res: Response) => {
       process.env.SECRET_KEY,
       { expiresIn: "30d" }
     );
-    res.cookie("token", token, {
+    res.cookie('token', token, {
       sameSite: "none",
-      // domain: "localhost:3001", // COMMENT
+      domain: "netnote-api.vercel.app",
       secure: true,
       httpOnly: true,
       maxAge: 36000000,
