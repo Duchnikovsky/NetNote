@@ -101,7 +101,7 @@ export default function DirectoryComponent() {
     directoryName = queryResults.directory.name;
   }
 
-  if (1)
+  if (isLoading)
     return (
       <div className={CSS.main}>
         <Loader2 className={CSS.loader} />
