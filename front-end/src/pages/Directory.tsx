@@ -143,7 +143,7 @@ export default function DirectoryComponent() {
             setMode={(mode) => setMode(mode)}
           />
           <li className={CSS.listHeader}>
-            <div className={CSS.listTitle}>Title</div>
+            <div className={CSS.listTitleArea}>Title</div>
             <div className={CSS.listContent}>Content</div>
             <div className={CSS.listCreateDate}>Creation time</div>
           </li>
@@ -151,7 +151,7 @@ export default function DirectoryComponent() {
             <ListNote note={note} key={note.id} />
           ))}
           <li className={CSS.listItem} onClick={() => toggleEditorModal(true)}>
-            <div className={CSS.listTitle}>New note</div>
+            <div className={CSS.listTitleArea}>New note</div>
             <div className={CSS.listContentCut} style={{ color: "#bcbcbc" }}>
               Click here to create new note
             </div>

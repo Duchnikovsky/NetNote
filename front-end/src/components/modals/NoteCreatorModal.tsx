@@ -67,7 +67,7 @@ export default function NoteCreatorModal({
         route(0);
       }, 1000);
       toggleModal(false);
-      return toast.success("Directory successfully created", {
+      return toast.success("Note successfully created", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -87,7 +87,7 @@ export default function NoteCreatorModal({
           type={"text"}
           maxLength={16}
           isDisabled={false}
-          width="40%"
+          width="300px"
           height="2.75rem"
           fontSize="16px"
           placeholder="Title of note"

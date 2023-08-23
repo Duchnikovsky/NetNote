@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model NetUser {
   id        String      @id @default(uuid())
   email     String      @unique
   password  String
@@ -20,7 +20,7 @@ model User {
 
 model Directory {
   id        String   @id @default(uuid())
-  user      User     @relation(fields: [usersId], references: [id])
+  user      NetUser  @relation(fields: [usersId], references: [id])
   usersId   String
   name      String
   Notes     Notes[]
@@ -29,7 +29,7 @@ model Directory {
 
 model Notes {
   id          String    @id @default(uuid())
-  user        User      @relation(fields: [usersId], references: [id])
+  user        NetUser   @relation(fields: [usersId], references: [id])
   usersId     String
   directory   Directory @relation(fields: [directoryId], references: [id])
   directoryId String

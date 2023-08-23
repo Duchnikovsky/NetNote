@@ -85,7 +85,7 @@ app.post("/signIn", async (req: Request, res: Response) => {
       return res.status(403).send("You are already signed in");
     }
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.netUser.findFirst({
       where: {
         email: email,
       },
@@ -142,7 +142,7 @@ app.post("/signup", async (req: Request, res: Response) => {
         password: body.password,
       });
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.netUser.findFirst({
       where: {
         email: email,
       },
@@ -154,7 +154,7 @@ app.post("/signup", async (req: Request, res: Response) => {
 
     const hashedPass = await bcrypt.hash(password, 10);
 
-    const newUser = await prisma.user.create({
+    const newUser = await prisma.netUser.create({
       data: {
         email: email,
         password: hashedPass,
@@ -446,6 +446,111 @@ app.post("/createNote", async (req: Request, res: Response) => {
       return res.status(400).send(error.errors[0].message);
     }
     return res.status(500).send("Could create note, try again later");
+  }
+});
+
+app.put("/editNote", async (req: Request, res: Response) => {
+  const body = await req.body;
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const { id, title, content } = z
+      .object({
+        id: z.string(),
+        title: z
+          .string()
+          .min(3, { message: "Note title must be between 3-16 characters" })
+          .max(16, {
+            message: "Note title must be between 3-16 characters",
+          }),
+        content: z
+          .string()
+          .min(1, { message: "Note can't be empty" })
+          .max(1000, { message: "Note can't be longer than 1000 characters" }),
+      })
+      .parse({
+        id: body.note,
+        title: body.title,
+        content: body.content,
+      });
+
+    const note = await prisma.notes.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!note) {
+      return res.status(411).send("There is not such note");
+    }
+
+    if (note?.usersId !== session.id) {
+      return res.status(401).send("You are not owner of this note");
+    }
+
+    await prisma.notes.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title: title,
+        content: content,
+      },
+    });
+
+    return res.status(200).send("ok");
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could update directory, try again later");
+  }
+});
+
+app.delete("/removeNote", async (req: Request, res: Response) => {
+  try {
+    const session = await getAuthSession(req);
+
+    if (!session) {
+      return res.status(401).send("You are not authorized");
+    }
+
+    const id = req.query.id;
+
+    if (id === undefined) {
+      return res.status(404).send("An error occured");
+    }
+
+    const note = await prisma.notes.findFirst({
+      where: {
+        id: id.toString(),
+      },
+    });
+
+    if (!note) {
+      return res.status(411).send("There is not such note");
+    }
+
+    if (note?.usersId !== session.id) {
+      return res.status(401).send("You are not owner of this note");
+    }
+
+    await prisma.notes.delete({
+      where: {
+        id: id.toString(),
+      },
+    });
+
+    return res.status(200).send("ok");
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).send(error.errors[0].message);
+    }
+    return res.status(500).send("Could not remove directory, try again later");
   }
 });
 

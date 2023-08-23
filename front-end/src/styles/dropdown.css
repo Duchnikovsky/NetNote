@@ -1,0 +1,194 @@
+.trigger {
+  background: none;
+  color: white;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.DropdownMenuContent,
+.DropdownMenuSubContent {
+  min-width: 140px;
+  background-color: #0e0f12;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 5px;
+  box-shadow: 0 0 1rem rgb(255, 245, 204, 0.5);
+  will-change: transform, opacity;
+  filter: none;
+}
+
+.DropdownMenuContent[data-side='top'],
+.DropdownMenuSubContent[data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+
+.DropdownMenuContent[data-side='right'],
+.DropdownMenuSubContent[data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+
+.DropdownMenuContent[data-side='bottom'],
+.DropdownMenuSubContent[data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+
+.DropdownMenuContent[data-side='left'],
+.DropdownMenuSubContent[data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.DropdownMenuItem,
+.DropdownMenuCheckboxItem,
+.DropdownMenuRadioItem,
+.DropdownMenuSubTrigger {
+  font-size: 16px;
+  line-height: 1;
+  color: #c4c6c8;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 2px 5px;
+  position: relative;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+  letter-spacing: normal;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.DropdownMenuSubTrigger[data-state='open'] {
+  background-color: #ede9fe;
+  color: black;
+}
+
+.DropdownMenuItem[data-disabled],
+.DropdownMenuCheckboxItem[data-disabled],
+.DropdownMenuRadioItem[data-disabled],
+.DropdownMenuSubTrigger[data-disabled] {
+  color: black;
+  pointer-events: none;
+}
+
+.DropdownMenuItem[data-highlighted],
+.DropdownMenuCheckboxItem[data-highlighted],
+.DropdownMenuRadioItem[data-highlighted],
+.DropdownMenuSubTrigger[data-highlighted] {
+  background-color: #c4c6c8;
+  color: #0e0f12;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.DropdownMenuLabel {
+  padding-left: 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: #c4c6c8;
+}
+
+.DropdownMenuSeparator {
+  height: 1px;
+  background-color: #c4c6c8;
+  margin: 5px;
+}
+
+.DropdownMenuItemIndicator {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.DropdownMenuArrow {
+  fill: black;
+}
+
+.IconButton {
+  font-family: inherit;
+  border-radius: 100%;
+  height: 35px;
+  width: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(87, 70, 175);
+  background-color: white;
+  box-shadow: 0 2px 10px black;
+}
+
+.IconButton:hover {
+  background-color: #f5f2ff;
+}
+
+.IconButton:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.RightSlot {
+  margin-left: auto;
+  padding-left: 20px;
+  color: #6f6e77;
+}
+
+[data-highlighted]>.RightSlot {
+  color: white;
+}
+
+[data-disabled] .RightSlot {
+  color: #c8c7cb;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

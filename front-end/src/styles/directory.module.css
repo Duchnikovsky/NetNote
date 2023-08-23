@@ -125,15 +125,29 @@
 }
 
 
-.noteTitle {
+.noteHeader {
   width: 100%;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  word-break: break-all;
   font-size: 20px;
   letter-spacing: 2px;
-  filter: drop-shadow(0 0 0.05rem #fff5cc);
+}
+
+.noteTitle{
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.noteMore{
+  position: absolute;
+  margin-top: -190px;
+  margin-left: 305px;
 }
 
 .more:hover {
@@ -199,15 +213,20 @@
   background: gray;
 }
 
-.listHeader {
+.listArea{
   width: 100%;
+  display: flex;
+}
+
+.listHeader {
+  width: 95%;
   height: 2rem;
   display: flex;
   align-items: center;
   font-size: 22px;
 }
 
-.listTitle {
+.listTitleArea {
   width: 25%;
   height: 100%;
   display: flex;
@@ -215,6 +234,18 @@
   justify-content: flex-start;
   text-shadow: 0 0 0.5rem #fff5cc;
   font-size: inherit;
+}
+
+.listTitle{
+  width: 100%;
+  height: 75%;
+  overflow: hidden;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  box-sizing: border-box;
+  padding-right: 5px;
 }
 
 .listContent {
@@ -257,10 +288,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  font-size: 16px;
+  margin-top: 0.75rem;
 }
 
 .listItem {
-  width: 100%;
+  width: 95%;
   height: 2rem;
   display: flex;
   align-items: center;
@@ -319,7 +352,7 @@
 }
 
 @media(max-width:1400px){
-  .listTitle{
+  .listTitleArea{
     width: 25%;
   }
   .listContent{
@@ -329,7 +362,7 @@
     width: 65%;
   }
   .listMore{
-    width: 10%;
+    width: 5%;
   }
   .listCreateDate {
     display: none;
