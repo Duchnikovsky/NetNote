@@ -78,6 +78,7 @@ export default function DirectoryComponent() {
       setMode(mode);
     } else {
       localStorage.setItem("notesmode", "grid");
+      setMode("grid");
     }
   }, [id]);
 
