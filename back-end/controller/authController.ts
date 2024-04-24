@@ -66,10 +66,10 @@ export async function signIn(req: Request, res: Response) {
       { expiresIn: "30d" }
     );
     res.cookie("token", token, {
-      // sameSite: "none",
-      // domain: "netnote-api.vercel.app",
+      sameSite: "none",
+      domain: "netnote-api.vercel.app",
       secure: true,
-      // httpOnly: true,
+      httpOnly: true,
       maxAge: 36000000,
     });
 
