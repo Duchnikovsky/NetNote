@@ -26,42 +26,15 @@ export default function DeleteDropdown({ noteId }: DeleteDropdownProps) {
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
       setTimeout(() => {
         route(0);
       }, 2000);
-      return toast.info("Note has been removed", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.info("Note has been removed");
     },
   });
 

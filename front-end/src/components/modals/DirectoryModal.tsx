@@ -28,7 +28,7 @@ export default function DirectoryModal({
   const [name, setName] = useState<string>(directory.name);
   const [confirm, toggleConfirm] = useState<boolean>(false);
 
-  const { mutate: edit, isLoading } = useMutation({
+  const { mutate: edit, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const payload: payload = {
         id: directory.id,
@@ -45,45 +45,18 @@ export default function DirectoryModal({
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
       route(0);
       toggleModal();
-      return toast.success("Directory successfully edited", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.success("Directory successfully edited");
     },
   });
 
-  const { mutate: remove, isLoading: isRemoveLoading } = useMutation({
+  const { mutate: remove, isPending: isRemoveLoading } = useMutation({
     mutationFn: async () => {
       const id = directory.id;
 
@@ -97,42 +70,15 @@ export default function DirectoryModal({
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
-      route('/dashboard');
-      route(0)
+      route("/dashboard");
+      route(0);
       toggleModal();
-      return toast.info("Directory successfully removed", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.info("Directory successfully removed");
     },
   });
 

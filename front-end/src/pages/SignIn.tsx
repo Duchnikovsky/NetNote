@@ -16,7 +16,7 @@ interface Values {
 }
 
 export default function SignIn() {
-  const route = useNavigate()
+  const route = useNavigate();
 
   const [values, setValues] = useState<Values>({
     email: "",
@@ -56,7 +56,7 @@ export default function SignIn() {
 
   const {
     mutate: signIn,
-    isLoading,
+    isPending: isLoading,
     isSuccess,
   } = useMutation({
     mutationFn: async () => {
@@ -73,42 +73,14 @@ export default function SignIn() {
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
-      toast.success("You have successfully signed in", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-
+      toast.success("You have successfully signed in");
       return setTimeout(() => {
-        route('/')
+        route("/");
       }, 2000);
     },
   });

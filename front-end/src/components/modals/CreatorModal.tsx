@@ -17,7 +17,7 @@ export default function CreatorModal({ toggleModal }: CreatorModalProps) {
   const route = useNavigate();
   const [name, setName] = useState<string>();
 
-  const { mutate: create, isLoading } = useMutation({
+  const { mutate: create, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const payload = {
         name: name,
@@ -32,41 +32,14 @@ export default function CreatorModal({ toggleModal }: CreatorModalProps) {
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
       route(0);
       toggleModal();
-      return toast.success("Directory successfully created", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.success("Directory successfully created");
     },
   });
 

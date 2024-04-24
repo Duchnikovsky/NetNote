@@ -16,7 +16,7 @@ interface Values {
 }
 
 export default function SignUp() {
-  const route = useNavigate()
+  const route = useNavigate();
 
   const [values, setValues] = useState<Values>({
     email: "",
@@ -71,7 +71,7 @@ export default function SignUp() {
 
   const {
     mutate: signUp,
-    isLoading,
+    isPending: isLoading,
     isSuccess,
   } = useMutation({
     mutationFn: async () => {
@@ -89,48 +89,21 @@ export default function SignUp() {
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
-      toast.success("You have successfully signed up", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.success("You have successfully signed up");
 
       return setTimeout(() => {
-        route('/signIn')
+        route("/signIn");
       }, 2000);
     },
   });
 
-  function checkPassword(){
-    if(values["password"] !== values["rep_password"]){
+  function checkPassword() {
+    if (values["password"] !== values["rep_password"]) {
       return toast.error("Passwords aren't the same", {
         position: "bottom-right",
         autoClose: 3000,
@@ -143,7 +116,7 @@ export default function SignUp() {
       });
     }
 
-    signUp()
+    signUp();
   }
 
   return (
@@ -160,7 +133,7 @@ export default function SignUp() {
           className={CSS.form}
           onSubmit={(e) => {
             e.preventDefault();
-            checkPassword()
+            checkPassword();
           }}
         >
           {input.map((input) => (
@@ -192,9 +165,9 @@ export default function SignUp() {
           </Button>
         </form>
         <div className={CSS.change}>
-          Go back to {" "}
+          Go back to{" "}
           <Link to={"/signIn"} className={"link"}>
-            sign in 
+            sign in
           </Link>
         </div>
       </div>

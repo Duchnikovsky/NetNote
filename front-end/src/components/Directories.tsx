@@ -21,27 +21,9 @@ export default function Directories() {
         return data;
       } catch (error) {
         if (error instanceof AxiosError) {
-          return toast.error(error.response?.data, {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+          return toast.error(error.response?.data);
         }
-        return toast.error("Could not fetch directories", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error("Could not fetch directories");
       }
     },
   });

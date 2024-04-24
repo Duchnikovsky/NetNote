@@ -23,7 +23,7 @@ export default function NoteEditorModal({
   const [title, setTitle] = useState<string>(note.title);
   const [value, setValue] = useState<string>(note.content);
 
-  const {mutate: edit, isLoading} = useMutation({
+  const { mutate: edit, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const payload = {
         title: title,
@@ -40,43 +40,16 @@ export default function NoteEditorModal({
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
       setTimeout(() => {
         route(0);
       }, 2000);
       toggleModal(false);
-      return toast.success("Note changes were saved", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.success("Note changes were saved");
     },
   });
 

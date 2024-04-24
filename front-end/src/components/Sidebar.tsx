@@ -13,9 +13,9 @@ import CreatorModal from "./modals/CreatorModal";
 export default function Sidebar() {
   const route = useNavigate();
   const [menu, setOpen] = useState<boolean>(true);
-  const [modal, toggleModal] = useState<boolean>(false)
+  const [modal, toggleModal] = useState<boolean>(false);
 
-  const { mutate: singOut, isLoading } = useMutation({
+  const { mutate: singOut, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const { data } = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/auth/signOut`,
@@ -27,39 +27,12 @@ export default function Sidebar() {
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
-        return toast.error(err.response?.data, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        return toast.error(err.response?.data);
       }
-      return toast.error("An error occured", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error("An error occured");
     },
     onSuccess: () => {
-      toast.info("You have signed out", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.info("You have signed out");
 
       return setTimeout(() => {
         route("/");
@@ -108,7 +81,7 @@ export default function Sidebar() {
           </Button>
         </div>
       )}
-      {modal && <CreatorModal toggleModal={() => toggleModal(!modal)}/>}
+      {modal && <CreatorModal toggleModal={() => toggleModal(!modal)} />}
     </div>
   );
 }
