@@ -5,9 +5,6 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 
-import { PrismaClient } from "@prisma/client";
-export const prisma = new PrismaClient();
-
 const app = express();
 app.use(express.json());
 
@@ -28,25 +25,6 @@ const notesRoute = require("./routes/noteRoute");
 app.use("/auth", authRoute);
 app.use("/directory", directoryRoute);
 app.use("/note", notesRoute);
-
-async function cleanup() {
-  await prisma.$disconnect();
-  console.log("Prisma client disconnected.");
-}
-
-process.on("beforeExit", async () => {
-  await cleanup();
-});
-
-process.on("SIGINT", async () => {
-  await cleanup();
-  process.exit(0);
-});
-
-process.on("SIGTERM", async () => {
-  await cleanup();
-  process.exit(0);
-});
 
 const port = process.env.APP_PORT || 3001;
 

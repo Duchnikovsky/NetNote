@@ -1,4 +1,4 @@
-import { prisma } from "..";
+import prisma from "../lib/prismaCLient";
 
 export async function getUserDirectories(userId: string) {
   const directories = await prisma.directory.findMany({

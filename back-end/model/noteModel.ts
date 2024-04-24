@@ -1,4 +1,5 @@
-import { prisma } from "..";
+import prisma from "../lib/prismaCLient";
+
 
 export async function getNotesByDirectoryId(directoryId: string) {
   const notes = await prisma.notes.findMany({
