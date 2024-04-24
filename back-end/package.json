@@ -2,12 +2,12 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
-    "dev": "ts-node-dev index.ts",
+    "dev": "node index.ts",
     "postinstall": "prisma generate"
   },
   "keywords": [],
