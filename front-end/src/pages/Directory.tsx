@@ -34,7 +34,7 @@ export default function DirectoryComponent() {
       try {
         const query = `${
           import.meta.env.VITE_SERVER_URL
-        }/getDirectory?id=${id}`;
+        }/directory/get?id=${id}`;
         const { data } = await axios.get<ApiResponse>(query, {
           withCredentials: true,
         });

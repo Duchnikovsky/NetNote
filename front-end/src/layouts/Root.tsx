@@ -10,7 +10,7 @@ export default function Root() {
     queryKey: ["session"],
     queryFn: async () => {
       try {
-        const query = `${import.meta.env.VITE_SERVER_URL}/getSession`;
+        const query = `${import.meta.env.VITE_SERVER_URL}/auth/getSession`;
         const { data } = await axios.get(query, { withCredentials: true });
         if (location.pathname === "/") {
           route("/dashboard");

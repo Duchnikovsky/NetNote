@@ -18,7 +18,7 @@ export default function Sidebar() {
   const { mutate: singOut, isLoading } = useMutation({
     mutationFn: async () => {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/signOut`,
+        `${import.meta.env.VITE_SERVER_URL}/auth/signOut`,
         {},
         { withCredentials: true }
       );

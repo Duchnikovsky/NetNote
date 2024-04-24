@@ -35,7 +35,7 @@ export default function DirectoryModal({
         name: name,
       };
 
-      const query = `${import.meta.env.VITE_SERVER_URL}/editDirectory`;
+      const query = `${import.meta.env.VITE_SERVER_URL}/directory/edit`;
 
       const { data } = await axios.put(query, payload, {
         withCredentials: true,
@@ -89,7 +89,7 @@ export default function DirectoryModal({
 
       const query = `${
         import.meta.env.VITE_SERVER_URL
-      }/removeDirectory?id=${id}`;
+      }/directory/remove?id=${id}`;
 
       const { data } = await axios.delete(query, { withCredentials: true });
 

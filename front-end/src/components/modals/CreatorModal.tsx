@@ -24,7 +24,7 @@ export default function CreatorModal({ toggleModal }: CreatorModalProps) {
       };
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/createDirectory`,
+        `${import.meta.env.VITE_SERVER_URL}/directory/create`,
         payload,
         { withCredentials: true }
       );

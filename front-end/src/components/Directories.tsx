@@ -16,7 +16,7 @@ export default function Directories() {
     queryKey: ["get-directories"],
     queryFn: async () => {
       try {
-        const query = `${import.meta.env.VITE_SERVER_URL}/getDirectories`;
+        const query = `${import.meta.env.VITE_SERVER_URL}/directory/getAll`;
         const { data } = await axios.get(query, { withCredentials: true });
         return data;
       } catch (error) {

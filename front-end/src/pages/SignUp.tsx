@@ -81,7 +81,7 @@ export default function SignUp() {
       };
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/signUp`,
+        `${import.meta.env.VITE_SERVER_URL}/auth/signUp`,
         payload,
         { withCredentials: true }
       );

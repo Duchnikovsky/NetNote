@@ -32,7 +32,7 @@ export default function NoteEditorModal({
       };
 
       const { data } = await axios.put(
-        `${import.meta.env.VITE_SERVER_URL}/editNote`,
+        `${import.meta.env.VITE_SERVER_URL}/note/edit`,
         payload,
         { withCredentials: true }
       );

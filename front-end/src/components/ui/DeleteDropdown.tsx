@@ -18,7 +18,7 @@ export default function DeleteDropdown({ noteId }: DeleteDropdownProps) {
     mutationFn: async () => {
       const query = `${
         import.meta.env.VITE_SERVER_URL
-      }/removeNote?id=${noteId}`;
+      }/note/remove?id=${noteId}`;
 
       const { data } = await axios.delete(query, { withCredentials: true });
 

@@ -65,7 +65,7 @@ export default function SignIn() {
         password: values["password"],
       };
       const { data } = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/signIn`,
+        `${import.meta.env.VITE_SERVER_URL}/auth/signIn`,
         payload,
         { withCredentials: true }
       );

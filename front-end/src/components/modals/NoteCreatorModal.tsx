@@ -32,7 +32,7 @@ export default function NoteCreatorModal({
       };
 
       const { data } = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/createNote`,
+        `${import.meta.env.VITE_SERVER_URL}/note/create`,
         payload,
         { withCredentials: true }
       );
