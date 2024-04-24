@@ -1,4 +1,4 @@
-import prisma from "../lib/prismaCLient";
+import prisma from "../lib/prismaClient";
 
 
 export async function getNotesByDirectoryId(directoryId: string) {
