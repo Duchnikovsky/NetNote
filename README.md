@@ -1,7 +1,3 @@
-Here's the revised README in English, including the deployment information:
-
----
-
 # NetNote
 
 ## Description
@@ -55,6 +51,3 @@ The project is divided into two main parts: front-end and back-end. Each section
 ## License
 This project is available under the MIT license.
 
----
-
-If there's anything else you'd like to add or adjust, let me know!
