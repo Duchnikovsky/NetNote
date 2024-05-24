@@ -45,6 +45,13 @@ To run the project locally, follow these steps:
 - Modals for creating and editing notes.
 - Error handling and user notifications via toasts.
 
+## Application preview
+
+<img src="https://utfs.io/f/821c9efc-4d95-490a-8176-3ccce6742e00-2g29.png"/>
+<img src="https://utfs.io/f/597c3dbd-120a-40e9-ae54-3c0278c534b0-2g2a.png"/>
+<img src="https://utfs.io/f/c9ce6e38-83ab-424f-9e77-6d5888caeae9-2g2b.png"/>
+<img src="https://utfs.io/f/daf36e73-3405-4427-823f-04a81fbc7f56-2g2c.png"/>
+
 ## Project Structure
 The project is divided into two main parts: front-end and back-end. Each section contains appropriate models, controllers, and routes needed to manage the application's state.
 
